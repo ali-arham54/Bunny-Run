@@ -4,13 +4,15 @@ using System.Collections;
 public class BunnyController : MonoBehaviour {
 
 	private Rigidbody2D myRigidBody;
+	private Animator myAnim;
+
 	public float BunnyJump = 500;
 
 	// Use this for initialization
 	void Start () {
 
 		myRigidBody = GetComponent<Rigidbody2D>();
-
+		myAnim = GetComponent<Animator> ();
 	
 	}
 	
@@ -23,6 +25,7 @@ public class BunnyController : MonoBehaviour {
 
 		}
 			
+		myAnim.SetFloat ("vVelocity", myRigidBody.velocity.y);
 	
 	}
 }
