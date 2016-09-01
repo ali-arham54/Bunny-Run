@@ -188,7 +188,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 125511735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.47, y: -1.2284417, z: 0}
+  m_LocalPosition: {x: -12.79, y: -1.2284417, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -413,7 +413,6 @@ GameObject:
   - 212: {fileID: 501642448}
   - 50: {fileID: 501642450}
   - 61: {fileID: 501642451}
-  - 114: {fileID: 501642453}
   - 114: {fileID: 501642452}
   - 95: {fileID: 501642454}
   m_Layer: 0
@@ -512,17 +511,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BunnyJump: 750
---- !u!114 &501642453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 501642447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93a80f6058fb234099185873dddfab8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &501642454
 Animator:
   serializedVersion: 3
@@ -912,7 +900,7 @@ MonoBehaviour:
   prefabToSpawn: {fileID: 4000010171520240, guid: 66db859ad81607a42acd11408e0b5868,
     type: 2}
   spawnRate: 1
-  randomDelay: 2
+  randomDelay: 1
 --- !u!4 &1052009240
 Transform:
   m_ObjectHideFlags: 0
