@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BunnyController : MonoBehaviour {
 
@@ -7,6 +8,9 @@ public class BunnyController : MonoBehaviour {
 	private Animator myAnim;
 	public float BunnyJump = 500;
 	private float bunnyHurtTime = -1;
+	private Collider2D myCollider;
+	public Text scoreText;
+	private float startTime;
 
 	// Use this for initialization
 	void Start () 
@@ -14,6 +18,8 @@ public class BunnyController : MonoBehaviour {
 		
 		myRigidBody = GetComponent<Rigidbody2D>();
 		myAnim = GetComponent<Animator> ();
+		myCollider = GetComponent<Collider2D> ();
+		startTime = Time.time;
 	
 	}
 
@@ -29,6 +35,7 @@ public class BunnyController : MonoBehaviour {
 			}
 
 			myAnim.SetFloat ("vVelocity", myRigidBody.velocity.y);
+			scoreText.text = (Time.time - startTime).ToString ("0.0");
 		
 		}
 
@@ -67,6 +74,7 @@ public class BunnyController : MonoBehaviour {
 			myAnim.SetBool ("BunnyHurt", true);
 			myRigidBody.velocity = Vector2.zero;
 			myRigidBody.AddForce (transform.up * BunnyJump);
+			myCollider.enabled = false;
 		}
 
 	}
