@@ -6,9 +6,7 @@ public class PickUps : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) 
 	{
-		Debug.Log ("is triggered");
 		Destroy (gameObject);
-
 	}
 
 
