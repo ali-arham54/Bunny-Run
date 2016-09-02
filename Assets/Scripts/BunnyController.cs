@@ -11,6 +11,8 @@ public class BunnyController : MonoBehaviour {
 	private Collider2D myCollider;
 	public Text scoreText;
 	private float startTime;
+	private int count; // To count Carrots
+	public Text countText; // To count Carrots
 
 	// Use this for initialization
 	void Start () 
@@ -20,6 +22,8 @@ public class BunnyController : MonoBehaviour {
 		myAnim = GetComponent<Animator> ();
 		myCollider = GetComponent<Collider2D> ();
 		startTime = Time.time;
+		count = 0; // to count carrots
+		SetCountText();
 	
 	}
 
@@ -78,4 +82,27 @@ public class BunnyController : MonoBehaviour {
 		}
 
 	}
+
+	void OnTriggerEnter2D (Collider2D other) // to count carrots
+	{
+		if (other.gameObject.CompareTag ("PickUpCarrot")) 
+		{
+			other.gameObject.SetActive (false);
+			count = count + 1;
+			SetCountText ();
+
+		}
+
+	}
+
+	void SetCountText()
+	{
+
+		countText.text = "Carrots:       " + count.ToString ();
+	}
+
+
+
+
+
 }
