@@ -13,6 +13,8 @@ public class BunnyController : MonoBehaviour {
 	private float startTime;
 	private int count; // To count Carrots
 	public Text countText; // To count Carrots
+	private int jumpsLeft = 2;
+
 
 	// Use this for initialization
 	void Start () 
@@ -32,14 +34,34 @@ public class BunnyController : MonoBehaviour {
 	{
 		if (bunnyHurtTime == -1) 
 		{	
-			if (Input.GetButtonUp ("Jump")) 
+			if (Input.GetButtonUp ("Jump") && jumpsLeft > 0) 
 			{
-				myRigidBody.AddForce (transform.up * BunnyJump);
+				if (myRigidBody.velocity.y < 0) 
+				{
+					myRigidBody.velocity = Vector2.zero;
+				}
 
+				if (jumpsLeft == 1) 
+				{
+
+
+					myRigidBody.AddForce (transform.up * BunnyJump * 0.75f);
+				
+				} 
+
+				else 
+				{
+
+					myRigidBody.AddForce (transform.up * BunnyJump);
+
+				}
+			
+			jumpsLeft--;
+			
 			}
 
 			myAnim.SetFloat ("vVelocity", myRigidBody.velocity.y);
-			scoreText.text = (Time.time - startTime).ToString ("0.0");
+			scoreText.text = (Time.time - startTime).ToString ("0");
 		
 		}
 
@@ -57,17 +79,14 @@ public class BunnyController : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("Enemy")) 
-		{
-			foreach (PrefabSpawner spawner in FindObjectsOfType<PrefabSpawner>()) 
-			{
+		if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("Enemy")) {
+			foreach (PrefabSpawner spawner in FindObjectsOfType<PrefabSpawner>()) {
 
 				spawner.enabled = false;
 
 			}
 
-			foreach (MoveLeft moveLefter in FindObjectsOfType<MoveLeft>()) 
-			{
+			foreach (MoveLeft moveLefter in FindObjectsOfType<MoveLeft>()) {
 			
 				moveLefter.enabled = false;
 			
@@ -79,15 +98,20 @@ public class BunnyController : MonoBehaviour {
 			myRigidBody.velocity = Vector2.zero;
 			myRigidBody.AddForce (transform.up * BunnyJump);
 			myCollider.enabled = false;
-		}
+		} 
 
+		else if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLayer")) 
+			{
+		
+				jumpsLeft = 2;				
+		
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other) // to count carrots
 	{
 		if (other.gameObject.CompareTag ("PickUpCarrot")) 
 		{
-			other.gameObject.SetActive (false);
 			count = count + 1;
 			SetCountText ();
 
@@ -98,7 +122,7 @@ public class BunnyController : MonoBehaviour {
 	void SetCountText()
 	{
 
-		countText.text = "Carrots:       " + count.ToString ();
+		countText.text = "Carrots:   " + count.ToString ();
 	}
 
 
