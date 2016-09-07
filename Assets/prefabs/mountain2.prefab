@@ -22,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000014156018412}
   - 114: {fileID: 114000011283864138}
   - 61: {fileID: 61000011750795296}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mountain2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +98,6 @@ SpriteRenderer:
   m_SortingLayerID: 1342476729
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 782ac685c6bfce74aa64b1506901418f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7686275, g: 0.5764706, b: 0.38823533, a: 1}
   m_FlipX: 0
   m_FlipY: 0
