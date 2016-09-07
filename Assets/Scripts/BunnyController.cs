@@ -14,6 +14,10 @@ public class BunnyController : MonoBehaviour {
 	private int count; // To count Carrots
 	public Text countText; // To count Carrots
 	private int jumpsLeft = 2;
+	public AudioSource JumpSfx;
+	public AudioSource DeathSfx;
+	public AudioSource PickUpsSfx;
+
 
 
 	// Use this for initialization
@@ -58,6 +62,8 @@ public class BunnyController : MonoBehaviour {
 			
 			jumpsLeft--;
 			
+				JumpSfx.Play ();
+
 			}
 
 			myAnim.SetFloat ("vVelocity", myRigidBody.velocity.y);
@@ -98,6 +104,8 @@ public class BunnyController : MonoBehaviour {
 			myRigidBody.velocity = Vector2.zero;
 			myRigidBody.AddForce (transform.up * BunnyJump);
 			myCollider.enabled = false;
+
+			DeathSfx.Play ();
 		} 
 
 		else if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLayer")) 
@@ -115,6 +123,7 @@ public class BunnyController : MonoBehaviour {
 			count = count + 1;
 			SetCountText ();
 
+			PickUpsSfx.Play ();
 		}
 
 	}
