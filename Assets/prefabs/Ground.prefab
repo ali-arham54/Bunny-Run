@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29eaa1569827d1c4292d81b5473cceee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
 --- !u!212 &212000010887621650
 SpriteRenderer:
   m_ObjectHideFlags: 1
