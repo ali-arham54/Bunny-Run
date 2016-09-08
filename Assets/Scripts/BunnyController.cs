@@ -40,14 +40,14 @@ public class BunnyController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
 		
-			Application.LoadLevel ("Title Scene");
+			Application.LoadLevel ("End Scene");
 		
 		}
 
 
 		if (bunnyHurtTime == -1) 
 		{	
-			if (Input.GetButtonUp ("Jump") && jumpsLeft > 0) 
+			if (Input.GetButtonUp ("Jump") || Input.GetButtonUp ("Fire1") && jumpsLeft > 0) 
 			{
 				if (myRigidBody.velocity.y < 0) 
 				{
@@ -84,7 +84,7 @@ public class BunnyController : MonoBehaviour {
 		{
 			if (Time.time > bunnyHurtTime + 2) 
 			{
-				Application.LoadLevel ("Title Scene");
+				Application.LoadLevel ("End Scene");
 
 			}
 		
