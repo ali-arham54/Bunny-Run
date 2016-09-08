@@ -20,6 +20,7 @@ public class BunnyController : MonoBehaviour {
 
 
 
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -36,9 +37,17 @@ public class BunnyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (Input.GetKeyDown (KeyCode.Escape)) 
+		{
+		
+			Application.LoadLevel ("Title Scene");
+		
+		}
+
+
 		if (bunnyHurtTime == -1) 
 		{	
-			if (Input.GetButtonUp ("Jump") && jumpsLeft > 0) 
+			if (Input.GetButtonUp ("Jump") || Input.GetButtonUp ("Fire1") && jumpsLeft > 0) 
 			{
 				if (myRigidBody.velocity.y < 0) 
 				{
@@ -75,7 +84,7 @@ public class BunnyController : MonoBehaviour {
 		{
 			if (Time.time > bunnyHurtTime + 2) 
 			{
-				Application.LoadLevel (Application.loadedLevel);
+				Application.LoadLevel ("Title Scene");
 
 			}
 		
@@ -85,8 +94,10 @@ public class BunnyController : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("Enemy")) {
-			foreach (PrefabSpawner spawner in FindObjectsOfType<PrefabSpawner>()) {
+		if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("Enemy")) 
+		{
+			foreach (PrefabSpawner spawner in FindObjectsOfType<PrefabSpawner>()) 
+			{
 
 				spawner.enabled = false;
 
@@ -106,7 +117,12 @@ public class BunnyController : MonoBehaviour {
 			myCollider.enabled = false;
 
 			DeathSfx.Play ();
-		} 
+
+
+		
+		}
+
+			 
 
 		else if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("GroundLayer")) 
 			{
@@ -114,7 +130,16 @@ public class BunnyController : MonoBehaviour {
 				jumpsLeft = 2;				
 		
 		}
+
+	
+			
+	
+
+
+	
+	
 	}
+
 
 	void OnTriggerEnter2D (Collider2D other) // to count carrots
 	{
@@ -131,7 +156,7 @@ public class BunnyController : MonoBehaviour {
 	void SetCountText()
 	{
 
-		countText.text = "Carrots:   " + count.ToString ();
+		countText.text = "Carrots:     " + count.ToString ();
 	}
 
 
