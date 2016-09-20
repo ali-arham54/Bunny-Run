@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BunnyController : MonoBehaviour {
 
@@ -44,52 +45,58 @@ public class BunnyController : MonoBehaviour {
 		
 		}
 
-
-		if (bunnyHurtTime == -1) 
-		{	
-			if (Input.GetButtonUp ("Jump") || Input.GetButtonUp ("Fire1") && jumpsLeft > 0) 
-			{
-				if (myRigidBody.velocity.y < 0) 
-				{
-					myRigidBody.velocity = Vector2.zero;
-				}
-
-				if (jumpsLeft == 1) 
-				{
-
-
-					myRigidBody.AddForce (transform.up * BunnyJump * 0.75f);
-				
-				} 
-
-				else 
-				{
-
-					myRigidBody.AddForce (transform.up * BunnyJump);
-
-				}
-			
-			jumpsLeft--;
-			
-				JumpSfx.Play ();
-
-			}
-
-			myAnim.SetFloat ("vVelocity", myRigidBody.velocity.y);
-			scoreText.text = (Time.time - startTime).ToString ("0");
-		
-		}
-
-		else 
-		{
-			if (Time.time > bunnyHurtTime + 2) 
-			{
-				Application.LoadLevel ("End Scene");
-
-			}
-		
-		}
 	
+
+
+
+		if (!EventSystem.current.IsPointerOverGameObject ()) {
+
+		if (bunnyHurtTime == -1) {	
+
+
+				
+				if (Input.GetButtonUp ("Jump") || Input.GetButtonUp ("Fire1") && jumpsLeft > 0) {
+					if (myRigidBody.velocity.y < 0) {
+						myRigidBody.velocity = Vector2.zero;
+					}
+
+					if (jumpsLeft == 1) {
+
+
+
+						myRigidBody.AddForce (transform.up * BunnyJump * 0.75f);
+				
+					} else {
+
+						myRigidBody.AddForce (transform.up * BunnyJump);
+
+					}
+
+
+			
+					jumpsLeft--;
+			
+					JumpSfx.Play ();
+
+
+				}
+
+				myAnim.SetFloat ("vVelocity", myRigidBody.velocity.y);
+				scoreText.text = (Time.time - startTime).ToString ("0");
+		
+			}
+
+			else {
+				if (Time.time > bunnyHurtTime + 2) {
+					Application.LoadLevel ("End Scene");
+
+				}
+		
+			}
+
+		}
+		
+
 	}
 
 	void OnCollisionEnter2D (Collision2D collision)
