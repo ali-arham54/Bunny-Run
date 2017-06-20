@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+
+
 
 public class BunnyController : MonoBehaviour {
 
@@ -14,6 +17,8 @@ public class BunnyController : MonoBehaviour {
 	private float startTime;
 	private int count; // To count Carrots
 	public Text countText; // To count Carrots
+	public Text HighScoreText; // to store high Score
+	private int HighScoreCount; // To Count High Score
 	private int jumpsLeft = 2;
 	public AudioSource JumpSfx;
 	public AudioSource DeathSfx;
@@ -40,8 +45,8 @@ public class BunnyController : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
-		
-			Application.LoadLevel ("End Scene");
+			SceneManager.LoadScene ("End Scene");
+			//Application.LoadLevel ("End Scene");
 		
 		}
 
@@ -88,7 +93,8 @@ public class BunnyController : MonoBehaviour {
 
 			else {
 				if (Time.time > bunnyHurtTime + 2) {
-					Application.LoadLevel ("End Scene");
+					SceneManager.LoadScene ("End Scene");
+					//Application.LoadLevel ("End Scene");
 
 				}
 		
@@ -154,6 +160,7 @@ public class BunnyController : MonoBehaviour {
 		{
 			count = count + 1;
 			SetCountText ();
+			SetHighScoreText ();
 
 			PickUpsSfx.Play ();
 		}
@@ -165,6 +172,29 @@ public class BunnyController : MonoBehaviour {
 
 		countText.text = "Carrots:     " + count.ToString ();
 	}
+
+	void SetHighScoreText()
+	{
+
+		HighScoreCount = count;
+
+		if (count > HighScoreCount) {
+		
+			HighScoreCount = count;
+		
+		}
+
+		HighScoreText.text = "High Score: " + HighScoreCount.ToString() + " carrots" ; 
+
+	}
+
+
+
+
+
+
+
+
 
 
 
